@@ -2,66 +2,79 @@ var form = document.getElementById('addForm');
 var itemList = document.getElementById('items');
 var filter = document.getElementById('filter');
 
-// Form submit event
+//form submit event
 form.addEventListener('submit', addItem);
-// Delete event
-itemList.addEventListener('click', removeItem);
-// Filter event
-filter.addEventListener('keyup', filterItems);
+filter.addEventListener('keyup',filter_item);
 
-// Add item
-function addItem(e){
-  e.preventDefault();
+//delete event
+itemList.addEventListener('click',remove_item)
 
-  // Get input value
-  var newItem = document.getElementById('item').value;
+function addItem(e)
+{
+    e.preventDefault();
+    
+    //get input value
+    var newItem = document.getElementById('item').value;
 
-  // Create new li element
-  var li = document.createElement('li');
-  // Add class
-  li.className = 'list-group-item';
-  // Add text node with input value
-  li.appendChild(document.createTextNode(newItem));
+    //
+    var li = document.createElement('li');
 
-  // Create del button element
-  var deleteBtn = document.createElement('button');
+    li.className = 'list-group-item';
 
-  // Add classes to del button
-  deleteBtn.className = 'btn btn-danger btn-sm float-right delete';
+    li.appendChild(document.createTextNode(newItem));
 
-  // Append text node
-  deleteBtn.appendChild(document.createTextNode('X'));
+    //create del button
+    var del_butt = document.createElement('button');
 
-  // Append button to li
-  li.appendChild(deleteBtn);
+    //add classes to del button
+    del_butt.className = "btn btn-danger btn-sm float-right delete";
 
-  // Append li to list
-  itemList.appendChild(li);
+    //create edit button
+    var edit_button = document.createElement('button');
+
+    //add classes to edit button
+    edit_button.className = "btn btn-light btn-sm float-right edit";
+
+
+    //apped text node
+    edit_button.appendChild(document.createTextNode('Edit'));
+    del_butt.appendChild(document.createTextNode('X'));
+    li.appendChild(del_butt);
+    li.appendChild(edit_button);
+
+    itemList.appendChild(li);
 }
 
-// Remove item
-function removeItem(e){
-  if(e.target.classList.contains('delete')){
-    if(confirm('Are You Sure?')){
-      var li = e.target.parentElement;
-      itemList.removeChild(li);
+function remove_item(e)
+{
+    if(e.target.classList.contains('delete')){
+        console.log(1);
+        if(confirm('are you sure'))
+        {
+            var li = e.target.parentElement;
+
+            itemList.removeChild(li);
+        }
     }
-  }
 }
 
-// Filter Items
-function filterItems(e){
-  // convert text to lowercase
-  var text = e.target.value.toLowerCase();
-  // Get lis
-  var items = itemList.getElementsByTagName('li');
-  // Convert to an array
-  Array.from(items).forEach(function(item){
-    var itemName = item.firstChild.textContent;
-    if(itemName.toLowerCase().indexOf(text) != -1){
-      item.style.display = 'block';
-    } else {
-      item.style.display = 'none';
-    }
-  });
+function filter_item(e)
+{
+    //convert upper to lowerr
+    var tet_el = e.target.value.toLowerCase();
+    console.log(tet_el);
+    var items = itemList.getElementsByTagName('li');
+    
+    //comvert it to array
+    Array.from(items).forEach(function(item){
+        var item_name = item.firstChild.textContent;
+        if(item_name.toLowerCase().indexOf(tet_el) != -1){
+            item.style.display = 'block';
+        }
+        else
+        {
+            item.style.display = 'none';
+        }
+    });
+
 }
