@@ -1,6 +1,7 @@
 var form = document.getElementById('addForm');
 var itemList = document.getElementById('items');
 var filter = document.getElementById('filter');
+var desc = document.getElementById('desc');
 
 //form submit event
 form.addEventListener('submit', addItem);
@@ -15,13 +16,16 @@ function addItem(e)
     
     //get input value
     var newItem = document.getElementById('item').value;
+    var newdesc = document.getElementById('desc').value;
+
+    var element = newItem + ' ' + newdesc
 
     //
     var li = document.createElement('li');
 
     li.className = 'list-group-item';
 
-    li.appendChild(document.createTextNode(newItem));
+    li.appendChild(document.createTextNode(element));
 
     //create del button
     var del_butt = document.createElement('button');
