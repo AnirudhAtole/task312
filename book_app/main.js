@@ -5,9 +5,14 @@ sub.addEventListener('submit',store_details);
 function store_details(e)
 {
     e.preventDefault();
-    var name = document.getElementById('name').value;
-    var email = document.getElementById('email').value;
 
-    localStorage.setItem(name,email);
+    let my_obj = {
+        "name" : document.getElementById("name").value,
+        "email" : document.getElementById("email").value
+    };
+
+    let my_obj_serialized = JSON.stringify(my_obj);
+
+    localStorage.setItem("my_obj",my_obj_serialized);
 
 }
