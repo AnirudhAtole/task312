@@ -35,11 +35,18 @@ function store_details(e)
     localStorage.setItem(document.getElementById("email").value,my_obj_serialized);
 }
 
+function retrieve_emails(text)
+{
+    return text.match(/([a-zA-Z0-9,_-]+@[a-zA-Z0-9,_-]+\.[a-zA-Z0-9_-]+)/gi);
+}
+
 function remove_user(e)
 {
     if(confirm("Do you want to delete the booking"))
     {
-         var li = e.target.parentElement;
+        var li = e.target.parentElement;
+        let email = retrieve_emails(li.innerText);
+        localStorage.removeItem(email);
         user_list.removeChild(li);
     }
 }
